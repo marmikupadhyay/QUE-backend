@@ -7,11 +7,15 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 app.use(morgan('dev'));
-
 mongoose.connect(process.env.DB_URL, {
 	useUnifiedTopology: true,
 	useNewUrlParser: true,
 });
+
+//BODY PARSER
+app.use(express.urlencoded({ extended: false }));
+app.use(express.raw());
+app.use(express.json());
 
 let db = mongoose.connection;
 

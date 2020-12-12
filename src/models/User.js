@@ -17,9 +17,8 @@ const UserSchema = new mongoose.Schema({
 		type: Boolean,
 		required: true,
 	},
-	Queue: {
+	queue: {
 		type: mongoose.Schema.Types.ObjectId,
-		required: true,
 	},
 });
 
