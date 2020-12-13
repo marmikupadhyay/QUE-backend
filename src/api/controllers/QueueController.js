@@ -7,6 +7,7 @@ const QueueController = {
 		Queue.findOne({ _id: req.params.queue_id })
 			.then((queue) => {
 				if (!queue) {
+					``;
 					res.status(400).json({
 						message: 'Queue Not Found ',
 						data: {},
