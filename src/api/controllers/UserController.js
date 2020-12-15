@@ -57,7 +57,7 @@ const UserController = {
 			mail,
 			password,
 			isShopkeeper,
-			queue: isShopkeeper ? newQueue._id : null,
+			queue: isShopkeeper ? [newQueue._id] : [],
 		});
 		User.findOne({ mail: mail })
 			.then((user) => {

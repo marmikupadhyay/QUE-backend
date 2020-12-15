@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
 		required: true,
 	},
 	queue: {
-		type: mongoose.Schema.Types.ObjectId,
+		type: [mongoose.Schema.Types.ObjectId],
 	},
 });
 
