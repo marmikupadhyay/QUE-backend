@@ -6,7 +6,11 @@ const { verifyToken } = require('../middlewares/AuthMiddleWare');
 router.get('/:queue_id/front', verifyToken, QueueController.getQueueFront);
 router.get('/:queue_id/enqueue/:user_id', verifyToken, QueueController.enqueue);
 router.get('/:queue_id/leave/:user_id', verifyToken, QueueController.leave);
-router.get('/:queue_id/position/:id', verifyToken, QueueController.getPosition);
+router.get(
+	'/:queue_id/position/:user_id',
+	verifyToken,
+	QueueController.getPosition
+);
 // New Routes
 router.post('/create/:user_id', verifyToken, QueueController.create);
 router.delete(

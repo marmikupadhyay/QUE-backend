@@ -123,10 +123,20 @@ const QueueController = {
 			});
 	},
 	getPosition(req, res, next) {
-		res.status(200).json({
-			message: 'Position Route',
-			data: { sheetname: 'xyz' },
-		});
+		Queue.findOne({ _id: req.params.queue_id })
+			.then((queue) => {
+				res.status(200).json({
+					message: 'Count Got Succesfully',
+					data: queue.current.indexOf(req.params.user_id),
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+				res.status(500).json({
+					message: 'Internal Server Error',
+					error: err,
+				});
+			});
 	},
 	create(req, res, next) {
 		User.findOne({ _id: req.params.user_id })
