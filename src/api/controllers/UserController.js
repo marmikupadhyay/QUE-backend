@@ -42,7 +42,7 @@ const UserController = {
 				data: req.body,
 			});
 		}
-		isShopkeeper = isShopkeeper === 'false' ? false : true;
+		// isShopkeeper = isShopkeeper === 'false' ? false : true;
 		var newQueue;
 		if (isShopkeeper) {
 			newQueue = new Queue();
