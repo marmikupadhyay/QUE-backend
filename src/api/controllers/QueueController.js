@@ -124,10 +124,30 @@ const QueueController = {
 						{ $push: { current: req.params.user_id } }
 					)
 						.then((queue) => {
-							res.status(200).json({
-								message: 'Enqueue Done Succesfully',
-								data: queue.current,
-							});
+							User.update(
+								{ _id: req.params.user_id },
+								{ $push: { queue: req.params.queue_id } }
+							)
+								.then((user) => {
+									if (!user) {
+										res.status(404).json({
+											message: 'User Not Found',
+											data: {},
+										});
+									} else {
+										res.status(200).json({
+											message: 'Enqueue Done Succesfully',
+											data: queue.current,
+										});
+									}
+								})
+								.catch((err) => {
+									console.log(err);
+									res.status(500).json({
+										message: 'Internal Server Error',
+										error: err,
+									});
+								});
 						})
 						.catch((err) => {
 							console.log(err);
@@ -157,10 +177,30 @@ const QueueController = {
 			{ $pull: { current: req.params.user_id } }
 		)
 			.then((queue) => {
-				res.status(200).json({
-					message: 'User Left Succesfully',
-					data: queue.current,
-				});
+				User.update(
+					{ _id: req.params.user_id },
+					{ $pull: { queue: req.params.queue_id } }
+				)
+					.then((user) => {
+						if (!user) {
+							res.status(404).json({
+								message: 'User Not Found',
+								data: {},
+							});
+						} else {
+							res.status(200).json({
+								message: 'User Left Succesfully',
+								data: queue.current,
+							});
+						}
+					})
+					.catch((err) => {
+						console.log(err);
+						res.status(500).json({
+							message: 'Internal Server Error',
+							error: err,
+						});
+					});
 			})
 			.catch((err) => {
 				console.log(err);
