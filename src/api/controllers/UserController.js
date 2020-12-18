@@ -43,21 +43,12 @@ const UserController = {
 			});
 		}
 		// isShopkeeper = isShopkeeper === 'false' ? false : true;
-		var newQueue;
-		if (isShopkeeper) {
-			newQueue = new Queue();
-			newQueue.save((err) => {
-				if (err) {
-					console.log(err);
-				}
-			});
-		}
 		const newUser = new User({
 			name,
 			mail,
 			password,
 			isShopkeeper,
-			queue: isShopkeeper ? [newQueue._id] : [],
+			queue: [],
 		});
 		User.findOne({ mail: mail })
 			.then((user) => {
