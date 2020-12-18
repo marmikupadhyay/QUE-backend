@@ -114,15 +114,6 @@ const QueueController = {
 			});
 	},
 	enqueue(req, res, next) {
-		if (
-			!ObjectId.isValid(req.params.user_id) ||
-			!ObjectId.isValid(req.params.queue_id)
-		) {
-			res.status(400).json({
-				message: 'Give Valid ID',
-				data: {},
-			});
-		}
 		Queue.findOne({
 			_id: req.params.queue_id,
 		})
@@ -161,15 +152,6 @@ const QueueController = {
 			});
 	},
 	leave(req, res, next) {
-		if (
-			!ObjectId.isValid(req.params.user_id) ||
-			!ObjectId.isValid(req.params.queue_id)
-		) {
-			res.status(400).json({
-				message: 'Give Valid ID',
-				data: {},
-			});
-		}
 		Queue.update(
 			{ _id: req.params.queue_id },
 			{ $pull: { current: req.params.user_id } }
